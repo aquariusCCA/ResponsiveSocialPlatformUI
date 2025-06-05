@@ -2,7 +2,7 @@
     <div class="container">
         <LeftSidebar class="left-side" />
         <!-- <MainContent class="main" /> -->
-        <!-- <RightSidebar class="right-side" /> -->
+        <RightSidebar class="right-side" />
         <!-- <Overlay :is-active="true"/> -->
     </div>
 </template>
@@ -12,10 +12,6 @@ import LeftSidebar from './LeftSidebar.vue';
 import MainContent from './MainContent.vue';
 import RightSidebar from './RightSidebar.vue';
 import Overlay from './Overlay.vue';
-import { useSidebarExpand } from '@/composables/useSidebarExpand'; // 根據實際路徑調整
-
-
-const { isExpand } = useSidebarExpand();
 </script>
 
 <style scoped lang="scss">

@@ -1,12 +1,26 @@
 <template>
-    <div class="right-side">
-        <div style="color: lightgray; font-weight: bold;">1</div>
-        <div style="color: lightgray; font-weight: bold;">2</div>
-        <div style="color: lightgray; font-weight: bold;">3</div>
+    <div 
+        class="right-side"
+        :class="{ active: isRightSidebarOpen }"
+        >
+        <Account />
+        <StoriesSideWrapper />
+        <ContatctsSideWrapper />
+        <SearchBar />
     </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useAppStore } from '@/stores/app';
+import { storeToRefs } from 'pinia';
+import Account from './Account.vue';
+import StoriesSideWrapper from './StoriesSideWrapper.vue';
+import ContatctsSideWrapper from './ContatctsSideWrapper.vue';
+import SearchBar from './SearchBar.vue';
+
+const appStore = useAppStore();
+const { isRightSidebarOpen } = storeToRefs(appStore);
+</script>
 
 <style scoped lang="scss">
 .right-side {
@@ -23,6 +37,10 @@
         right: 0;
         transform: translateX(280px);
         transition: .3s;
+
+        &.acticve {
+            transform: translateX(0);
+        }
     }
 }
 </style>
