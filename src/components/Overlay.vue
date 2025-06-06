@@ -1,15 +1,28 @@
 <template>
     <div 
         class="overlay" 
-        :class="{ 'active': isActive }"
+        :class="{ 'active': isOverlayOpen }"
+        @click="toggleOverlay"
     >
     </div>
 </template>
 
 <script lang="ts" setup>
-defineProps<{
-    isActive: boolean;
-}>();
+import { useAppStore } from '@/stores/app';
+import { storeToRefs } from 'pinia';
+
+const appStore = useAppStore();
+const { isOverlayOpen, isLeftSidebarOpen, isRightSidebarOpen } = storeToRefs(appStore);
+const { toggleLeftSidebar, toggleRightSidebar } = appStore;
+
+const toggleOverlay = () => {
+    if (isLeftSidebarOpen.value) {
+        toggleLeftSidebar();
+    }
+    if (isRightSidebarOpen.value) {
+        toggleRightSidebar();
+    }
+};
 </script>
 
 <style scoped lang="scss">

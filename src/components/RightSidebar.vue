@@ -6,7 +6,7 @@
         <Account />
         <StoriesSideWrapper />
         <ContatctsSideWrapper />
-        <SearchBar />
+        <RightSearchBar />
     </div>
 </template>
 
@@ -16,7 +16,7 @@ import { storeToRefs } from 'pinia';
 import Account from './Account.vue';
 import StoriesSideWrapper from './StoriesSideWrapper.vue';
 import ContatctsSideWrapper from './ContatctsSideWrapper.vue';
-import SearchBar from './SearchBar.vue';
+import RightSearchBar from './RightSearchBar.vue';
 
 const appStore = useAppStore();
 const { isRightSidebarOpen } = storeToRefs(appStore);
@@ -37,10 +37,12 @@ const { isRightSidebarOpen } = storeToRefs(appStore);
         right: 0;
         transform: translateX(280px);
         transition: .3s;
+        z-index: 4;
 
-        &.acticve {
-            transform: translateX(0);
+        &.active {
+            transform: translatex(0);
         }
     }
+
 }
 </style>

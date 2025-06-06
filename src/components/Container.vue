@@ -1,9 +1,9 @@
 <template>
     <div class="container">
         <LeftSidebar class="left-side" />
-        <!-- <MainContent class="main" /> -->
+        <MainContent class="main" />
         <RightSidebar class="right-side" />
-        <!-- <Overlay :is-active="true"/> -->
+        <Overlay :is-active="true"/>
     </div>
 </template>
 

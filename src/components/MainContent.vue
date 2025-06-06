@@ -1,12 +1,12 @@
 <template>
     <div class="main">
-        <div style="color: lightgray; font-weight: bold;">1</div>
-        <div style="color: lightgray; font-weight: bold;">2</div>
-        <div style="color: lightgray; font-weight: bold;">3</div>
+        <MainSearchBar />
     </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import MainSearchBar from './MainSearchBar.vue';
+</script>
 
 <style scoped lang="scss">
 .main {

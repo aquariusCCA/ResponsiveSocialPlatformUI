@@ -43,6 +43,7 @@ const { isLeftSidebarOpen } = storeToRefs(appStore);
 
   &.active {
     width: 260px;
+    z-index: 4;
   }
 
   &:not(.active) {
