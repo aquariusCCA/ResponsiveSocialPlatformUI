@@ -1,90 +1,135 @@
 <template>
-    <div class="pages box">
-        <div class="intro-title">
-            Your pages
-            <button class="intro-menu"></button>
-        </div>
-        <div class="user">
-            <img 
-                src="https://images.unsplash.com/photo-1549068106-b024baf5062d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0f"
-                alt="" class="user-img"
-            >
-            <div class="username">Chandelio</div>
-        </div>
-        <div class="user">
-            <img 
-                src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=d5849d81af587a09dbcf3f11f6fa122f"
-                class="user-img"
-            >
-            <div class="username">Janet Jolie</div>
-        </div>
-        <div class="user">
-            <img 
-                src="https://images.unsplash.com/photo-1546539782-6fc531453083?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                class="user-img"
-            >
-            <div class="username">Patrick Watsons</div>
-        </div>
+  <div class="page-box">
+    <div class="page-box__header">
+      <h2 class="page-box__title">Your pages</h2>
+      <button
+        type="button"
+        class="page-box__menu-btn"
+      ></button>
     </div>
+
+    <ul class="page-box__user-list">
+      <li
+        v-for="user in users"
+        :key="user.id"
+        class="page-box__user"
+      >
+        <img
+          :src="user.avatar"
+          :alt="user.alt"
+          class="page-box__avatar"
+        />
+        <span class="page-box__name">{{ user.name }}</span>
+      </li>
+    </ul>
+  </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+interface User {
+  id: string | number
+  avatar: string
+  name: string
+  alt?: string
+}
+
+const users: User[] = [
+    {
+        id: 1,
+        avatar: 'https://i.pravatar.cc/150?img=1',
+        name: 'John Doe',
+        alt: 'John Doe Avatar'
+    },
+    {
+        id: 2,
+        avatar: 'https://i.pravatar.cc/150?img=2',
+        name: 'Jane Smith',
+        alt: 'Jane Smith Avatar'
+    },
+    {
+        id: 3,
+        avatar: 'https://i.pravatar.cc/150?img=3',
+        name: 'Alice Johnson',
+        alt: 'Alice Johnson Avatar'
+    }
+]
+</script>
 
 <style scoped lang="scss">
-.pages {
-    margin-top: 20px;
-    padding: 20px;
-}
+.page-box {
+  background: #151728;
+  border-radius: 4px;
+  padding: 20px;
+  margin-top: 20px;
+  font-family: "DM Sans", sans-serif;
 
-.box {
-    background-color: #151728;
-    border-radius: 4px;
-}
-
-.intro-title {
-    font-family: "DM Sans", sans-serif;
-    color: #5c5e6e;
-    font-weight: 600;
-    font-size: 18px;
+  &__header {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-}
+  }
 
-.intro-menu {
-    background-color: #8f98a9;
-    box-shadow: -8px 0 0 0 #8f98a9, 8px 0 0 0 #8f98a9;
-    width: 5px;
-    height: 5px;
-    border: 0;
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #5c5e6e;
+    margin: 0;
+  }
+
+  &__menu-btn {
+    // 三點菜單
+    position: relative;
+    width: 4px;
+    height: 4px;
     padding: 0;
-    border-radius: 50%;
     margin-left: auto;
-    margin-right: 8px;
-}
+    border: none;
+    background-color: #8f98a9;
+    border-radius: 50%;
+    cursor: pointer;
+    
+    // 左右兩個 pseudo-dots
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 4px;
+      height: 4px;
+      background-color: #8f98a9;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+    &::before { left: -(20px / 2); }
+    &::after  { right: -(20px / 2); }
+  }
 
-.user {
+  &__user-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__user {
     display: flex;
     align-items: center;
     cursor: pointer;
-}
+  }
 
-.user + .user {
-  margin-top: 18px;
-}
-
-.user-img {
+  &__avatar {
     width: 45px;
     height: 45px;
-    margin-right: 15px;
+    margin-right: 20px;
     border-radius: 50%;
     object-fit: cover;
-    object-position: center;
-}
+  }
 
-.username {
+  &__name {
     color: #ccc8db;
     font-size: 15px;
-    font-family: "DM Sans", sans-serif;
+  }
 }
 </style>
