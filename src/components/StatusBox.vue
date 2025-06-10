@@ -1,5 +1,5 @@
 <template>
-    <div class="status box">
+    <div class="status-box">
         <div class="status-menu">
             <a class="status-menu-item active" href="#">Status</a>
             <a class="status-menu-item" href="#">Photos</a>
@@ -40,7 +40,9 @@
                     
                     />
                 </svg>
-                People
+                <span class="label">
+                    People
+                </span>
             </a>
             <a href="#" class="status-action">
                 <svg    
@@ -52,7 +54,9 @@
                         fill="#e21b1b" 
                     />
                 </svg>
-                Check in
+                <span class="label">
+                    Check in
+                </span>
             </a>
             <a href="#" class="status-action">
                 <svg 
@@ -73,7 +77,9 @@
                         fill="#fafafa" 
                     />
                 </svg>
-                Mood
+                <span class="label">
+                    Mood
+                </span>
             </a>
             <button class="status-share">Share</button>
         </div>
@@ -83,35 +89,42 @@
 <script lang="ts" setup></script>
 
 <style scoped lang="scss">
-.box {
+.status-box {
     background-color: #151728;
-    border-radius: 4px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
 }
 
 .status-menu {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     padding: 20px;
 
-    @media screen and (max-width: 500px) {
-        font-size: 14px;
-    }
-}
+    .status-menu-item {
+        flex-shrink: 0;
+        position: relative;
+        color: #ccc8db;
+        padding: 10px 14px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 500;
+        line-height: 0.7;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: background-color 0.2s ease,
+            color 0.2s ease;
 
-.status-menu-item {
-    text-decoration: none;
-    color: #ccc8db;
-    padding: 10px 14px;
-    line-height: 0.7;
-    font-family: "DM Sans", sans-serif;
-    font-weight: 500;
-    border-radius: 20px;
+        &:hover,
+        &.active {
+            background-color: #2e2e40;
+            color: #fff;
+        }
 
-    &.active,
-    &:hover {
-        background-color: #2e2e40;
-        color: #fff;
+        &:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.3);
+            outline-offset: 2px;
+        }
     }
 }
 
@@ -120,8 +133,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 20px;
-    padding: 0 20px;
-    padding-bottom: 20px;
+    padding: 20px;
     border-bottom: 1px solid #272a3a;
 
     .status-img {
@@ -129,6 +141,7 @@
         height: 50px;
         border-radius: 50%;
         object-fit: cover;
+        flex-shrink: 0;
     }
 
     .status-textarea {
@@ -136,39 +149,61 @@
         background-color: transparent;
         border: none;
         resize: none;
-        margin-top: 15px;
         color: #fff;
         max-width: calc(100% - 70px);
+        transition: background-color 0.2s ease;
 
         &::placeholder {
             color: #5c5d71;
+        }
+
+        &:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.05);
         }
     }
 }
 
 .status-actions {
     display: flex;
+    align-items: center;
+    gap: 16px;
     padding: 10px 20px;
+    border-top: 1px solid #272a3a;
+    background: darken(#151728, 3%);
 
     .status-action {
         display: flex;
         align-items: center;
-        margin-right: 20px;
+        padding: 0.25rem 0.5rem;
         text-decoration: none;
+        border-radius: 8px;
         color: #ccc8db;
+        transition: background 0.2s ease, color 0.2s ease;
 
-        @media screen and (max-width: 1320px) {
-            overflow: hidden;
+        svg {
+            flex-shrink: 0;
             width: 16px;
-            color: transparent;
-            white-space: nowrap;
+            margin-right: 8px;
         }
-    }
 
-    .status-action svg {
-        flex-shrink: 0;
-        width: 16px;
-        margin-right: 8px;
+        .label {
+            font-size: 0.875rem;
+
+            @media screen and (max-width: 1320px) {
+                display: none;
+            }
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        &:focus-visible {
+            outline: 2px solid lighten(#1b86f9, 30%);
+            outline-offset: 2px;
+        }
     }
 
     .status-share {
@@ -180,6 +215,19 @@
         margin-left: auto;
         box-shadow: 0 0 20px #1b86f9;
         cursor: pointer;
+
+        transition: background 0.2s ease, box-shadow 0.2s ease;
+
+
+        &:hover {
+            background: darken(#1b86f9, 10%);
+            box-shadow: 0 0 12px rgba(#1b86f9, 0.8);
+        }
+
+        &:focus-visible {
+            outline: 2px solid lighten(#1b86f9, 30%);
+            outline-offset: 2px;
+        }
     }
 }
 </style>
